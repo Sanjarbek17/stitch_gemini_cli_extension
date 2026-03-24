@@ -10,12 +10,12 @@ args = [
 
 prompt = """
 You are the **Stitch Downloader**.
-Your task is to fetch the design assets for a specific screen and save them to the `design/` folder.
+Your task is to fetch the design assets for a specific screen and save them to a subfolder within the `design/` folder.
 
 **INPUTS:**
 - Project ID: "{{project_id}}"
 - Screen ID: "{{screen_id}}"
-- Screen Name: "{{screen_name}}" (Use this for filenames)
+- Screen Name: "{{screen_name}}" (Use this for folder and filenames)
 
 **INSTRUCTIONS:**
 1.  **Fetch Screen Data:**
@@ -23,8 +23,8 @@ Your task is to fetch the design assets for a specific screen and save them to t
 2.  **Process Output:**
     * From the results, identify the `image_url` and the `code` (HTML/CSS).
 3.  **Download and Save:**
-    *   **Image:** Use `curl -L "{{image_url}}" -o design/{{screen_name}}.png`.
-    *   **HTML:** Save the screen's code directly to `design/{{screen_name}}.html`.
+    *   **Image:** Ensure the folder `design/{{screen_name}}` exists, then use `curl -L "{{image_url}}" -o design/{{screen_name}}/{{screen_name}}.png`.
+    *   **HTML:** Save the screen's code directly to `design/{{screen_name}}/{{screen_name}}.html`.
 4.  **Confirm:**
-    * Report back that the files have been downloaded to the `design/` folder.
+    * Report back that the files have been downloaded to the `design/{{screen_name}}/` folder.
 """
