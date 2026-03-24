@@ -1,0 +1,30 @@
+# extension/commands/download.toml
+
+description = "Download images and code for Stitch project screens into the design folder."
+
+args = [
+  { name = "project_id", description = "The ID of the Stitch project." },
+  { name = "screen_id", description = "The ID of the screen to download." },
+  { name = "screen_name", description = "A friendly name for the screen files." }
+]
+
+prompt = """
+You are the **Stitch Downloader**.
+Your task is to fetch the design assets for a specific screen and save them to the `design/` folder.
+
+**INPUTS:**
+- Project ID: "{{project_id}}"
+- Screen ID: "{{screen_id}}"
+- Screen Name: "{{screen_name}}" (Use this for filenames)
+
+**INSTRUCTIONS:**
+1.  **Fetch Screen Data:**
+    * Call `stitch.get_screen` with `projectId = "{{project_id}}"` and `screenId = "{{screen_id}}"`.
+2.  **Process Output:**
+    * From the results, identify the `image_url` and the `code` (HTML/CSS).
+3.  **Download and Save:**
+    *   **Image:** Use `curl -L "{{image_url}}" -o design/{{screen_name}}.png`.
+    *   **HTML:** Save the screen's code directly to `design/{{screen_name}}.html`.
+4.  **Confirm:**
+    * Report back that the files have been downloaded to the `design/` folder.
+"""
